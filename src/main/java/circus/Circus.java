@@ -1,11 +1,13 @@
 package circus;
 
-import circus.animal.Animal;
-import circus.animal.Duck;
-import circus.animal.Parrot;
+import circus.animal.*;
+import circus.stuff.Cage;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Circus {
     private static Animal[] animals = {
@@ -25,7 +27,6 @@ public class Circus {
         }
     }
 
-<<<<<<< HEAD:src/main/java/circus/Circus.java
     private static int calculateValue(Asset[] assets) {
         int total = 0;
         for (Asset asset : assets) {
@@ -38,29 +39,52 @@ public class Circus {
                 // more
                 // code 
                 // here ...
-=======
-    private static int calculateAssetValue(Asset[] assets) {
-        int total = 0;
-        for (Asset a : assets) {
-            if (a.getValue() <= 5) {
-                System.out.println("Ignoring low value item: " + a.getValue());
-                continue;
->>>>>>> 8149490d17fb8c4450de7fb0ea91099477b47b75:src/main/java/Circus.java
             }
-            total += a.getValue();
-            System.out.println("Adding item value: " + a.getValue());
+            total += asset.getValue();
+            System.out.println("Adding item value: " + asset.getValue());
         }
         return total;
     }
 
+    private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
+        for (Animal a : animalArrayList) {
+            System.out.println(a);
+        }
+    }
+
     public static void main(String[] args) {
         makeAnimalsTalk();
-<<<<<<< HEAD:src/main/java/circus/Circus.java
         System.out.println("Total value of equipments " + calculateValue(animals));
         System.out.println("Total value of equipments " + calculateValue(equipments));
-=======
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
->>>>>>> 8149490d17fb8c4450de7fb0ea91099477b47b75:src/main/java/Circus.java
+
+        System.out.println("Number of animals: " + animals.length);
+        ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
+        System.out.println("Number of animals: " + animalArrayList.size());
+        animalArrayList.add(new Tiger("Sherkhan"));
+        System.out.println("Number of animals: " + animalArrayList.size());
+
+        animalArrayList.add(new Parrot("Percy"));
+
+        Duck louie = new Duck("eee");
+        animalArrayList.add(louie);
+        Elephant strongOne = new Elephant("StrongOne");
+        animalArrayList.add(strongOne);
+
+        printAllAnimals(animalArrayList);
+
+        Cage<Duck> duckCage = new Cage<>();
+        Duck duck = new Duck("aaaaa");
+        duckCage.lockUp(duck);
+        Parrot parrot = new Parrot("Perks");
+        Cage<Parrot> parrotCage = new Cage<>();
+        parrotCage.lockUp(parrot);
+
+        ArrayList<Cage> cages = new ArrayList<>();
+        cages.add(duckCage);
+        cages.add(parrotCage);
+
+        for(Cage c: cages) {
+            c.release();
+        }
     }
 }

@@ -2,11 +2,15 @@ package circus.animal;
 
 import circus.Asset;
 
-public abstract class Animal implements Asset {
+import java.util.Comparator;
 
-<<<<<<< HEAD
-=======
+public abstract class Animal implements Asset {
     public String name;
->>>>>>> 8149490d17fb8c4450de7fb0ea91099477b47b75
     public abstract String speak();
+
+    public static Comparator<Animal> animalComparator = new Comparator<Animal>(){
+            public int compare(Animal left, Animal right) {
+                return left.name.toLowerCase().compareTo(right.name.toLowerCase());
+            }
+    };
 }
